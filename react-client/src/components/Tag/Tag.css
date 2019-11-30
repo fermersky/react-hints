@@ -1,0 +1,55 @@
+.tag-link {
+    color: #fff;
+    position: relative;
+    display: block;
+}
+
+.tag-link:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.tag-link::before {
+    position: absolute;
+    content: 'View other hinst on this tag';
+
+    background: rgb(59, 5, 61);
+
+    bottom: -55px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 7px 10px;
+    border-radius: 7px;
+    text-transform: none;
+
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.tag-link::after {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 7px 7px 7px;
+    border-color: transparent transparent rgb(59, 5, 61) transparent;
+
+    position: absolute;
+    content: '';
+    bottom: -26px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.tag-link:hover::before {
+    opacity: 1;
+    bottom: -50px;
+}
+
+.tag-link:hover::after {
+    opacity: 1;
+    bottom: -17px;
+}

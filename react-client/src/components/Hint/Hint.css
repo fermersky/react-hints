@@ -1,0 +1,31 @@
+.hint-body {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 100px;
+}
+
+.hint-title {
+    font-size: 80px;
+    max-width: 100%;
+    font-weight: bold;
+    white-space: pre-wrap;
+    height: 500px;
+    color: rgb(36, 36, 36);
+}
+.typed-cursor,
+.typed-cursor.typed-cursor--blink {
+    font-size: 3em;
+    margin-left: -10px;
+}
+
+.hint-tags {
+    display: flex;
+    flex-direction: row;
+    padding-top: 30px;
+}
+
+.btn.btn-raised.btn-primary.hint-tag {
+    background: #000;
+    margin: 20px 10px;
+}
