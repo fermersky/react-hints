@@ -11,7 +11,7 @@ class HintAuthorContainer extends Component {
         type: PropTypes.oneOf(['min', 'max']).isRequired
     };
 
-    componentWillMount(prevProps) {
+    componentDidMount() {
         const { userId } = this.props;
         console.log(userId);
 
