@@ -5,13 +5,27 @@ import { fetchHint } from './../actions/hints';
 import { connect } from 'react-redux';
 
 class HintContainer extends Component {
-    componentWillMount() {
+    state = {
+        hint: {}
+    };
+
+    componentDidMount() {
         const hintSlug = this.props.match.params.hintSlug;
         this.props.fetchHint(hintSlug);
     }
 
+    static getDerivedStateFromProps(props, state) {
+        if (props.hints.currentHint !== state.hint) {
+            return {
+                hint: props.hints.currentHint
+            };
+        }
+
+        return null;
+    }
+
     render() {
-        return <Hint hint={this.props.hints.currentHint} />;
+        return <Hint hint={this.state.hint} />;
     }
 }
 

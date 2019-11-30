@@ -3,10 +3,12 @@ import Typed from 'typed.js';
 import PropTypes from 'prop-types';
 import './Hint.css';
 import Tag from '../Tag/Tag';
+import HintAuthorContainer from '../../containers/HintAuthorContainer';
 
 class Hint extends Component {
     state = {
-        typedComplete: false
+        typedComplete: false,
+        hint: {}
     };
 
     static propTypes = {
@@ -15,6 +17,16 @@ class Hint extends Component {
             tags: PropTypes.array
         }).isRequired
     };
+
+    static getDerivedStateFromProps(props, state) {
+        if (props.hint !== state.hint) {
+            return {
+                hint: props.hint
+            };
+        }
+
+        return null;
+    }
 
     componentDidUpdate() {
         // initialize typedjs script
@@ -50,30 +62,33 @@ class Hint extends Component {
 
     render() {
         const { hint } = this.props;
-        console.log('hint', hint);
+
         return (
-            hint && (
-                <div className="container">
-                    <div className="row hint-body">
-                        <h2 className="col-md-12">
-                            <span
-                                className="hint-title"
-                                style={{ whiteSpace: 'pre-wrap' }}
-                                ref={el => {
-                                    this.el = el;
-                                }}
-                            />
-                        </h2>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12">
-                            <ul className="hint-tags">
-                                {this.mapTagsToList(hint.tags)}
-                            </ul>
-                        </div>
+            <div className="container">
+                <div className="row hint-body">
+                    <h2 className="col-md-12">
+                        <span
+                            className="hint-title"
+                            style={{ whiteSpace: 'pre-wrap' }}
+                            ref={el => {
+                                this.el = el;
+                            }}
+                        />
+                    </h2>
+                </div>
+                <div className="row">
+                    <div className="col-md-12">
+                        <ul className="hint-tags">
+                            {this.mapTagsToList(hint.tags)}
+                        </ul>
                     </div>
                 </div>
-            )
+                {this.state.typedComplete && (
+                    <div className="row">
+                        <HintAuthorContainer type="min" userId={hint.user_id} />
+                    </div>
+                )}
+            </div>
         );
     }
 }

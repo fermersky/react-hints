@@ -11,7 +11,7 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String
     },
-    avatar: {
+    img_path: {
         type: String
     }
 });

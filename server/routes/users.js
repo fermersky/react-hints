@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const fs = require('fs');
+const path = require('path');
 const bcryptjs = require('bcryptjs');
 const {
     registerUserValidateAsync,
@@ -72,13 +74,31 @@ router.post('/login', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
+        const user = await User.findOne({ _id: req.params.id });
 
         if (!user) {
             res.status(404).send('user was not found');
         }
 
-        res.json(user);
+        res.send(user);
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
+router.get('/img/:userId', async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.params.userId });
+
+        if (!user) {
+            res.status(404).send('user was not found');
+        }
+
+        const readStream = fs.createReadStream(
+            '../server/resources/avatars/' + user.img_path
+        );
+
+        readStream.pipe(res);
     } catch (err) {
         res.status(400).send(err);
     }
