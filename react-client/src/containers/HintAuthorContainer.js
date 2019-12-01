@@ -14,8 +14,10 @@ class HintAuthorContainer extends Component {
     componentDidMount() {
         const { userId } = this.props;
 
-        this.props.fetchUserImage(userId);
-        this.props.fetchUser(userId);
+        if (userId) {
+            this.props.fetchUserImage(userId);
+            this.props.fetchUser(userId);
+        }
     }
 
     render() {

@@ -7,9 +7,22 @@ router.get('/', (req, res) => {
     res.end('get tips');
 });
 
-router.get('/:slug', async (req, res) => {
+router.get('/slug/:slug', async (req, res) => {
     try {
         const hint = await Hint.findOne({ slug: req.params.slug });
+        if (!hint) {
+            res.status(404).end('hint not found');
+        } else {
+            res.json(hint);
+        }
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+router.get('/tag/:tag', async (req, res) => {
+    try {
+        const hint = await Hint.findOne({ tags: req.params.tag });
         if (!hint) {
             res.status(404).end('hint not found');
         } else {

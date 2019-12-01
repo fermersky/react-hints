@@ -18,7 +18,9 @@ export const fetchHint = hintSlug => {
     return async dispatch => {
         dispatch(requestHint());
 
-        const hint = await fetch('http://localhost:3000/api/hints/' + hintSlug);
+        const hint = await fetch(
+            'http://localhost:3000/api/hints/slug/' + hintSlug
+        );
         const hintJson = await hint.json();
         dispatch(recieveHint(hintJson));
     };

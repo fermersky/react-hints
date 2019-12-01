@@ -94,11 +94,13 @@ router.get('/img/:userId', async (req, res) => {
             res.status(404).send('user was not found');
         }
 
-        const readStream = fs.createReadStream(
-            '../server/resources/avatars/' + user.img_path
-        );
-
-        readStream.pipe(res);
+        if (user.img_path) {
+            const readStream = fs.createReadStream(
+                '../server/resources/avatars/' + user.img_path
+            );
+            readStream.pipe(res);
+            res.status(200);
+        }
     } catch (err) {
         res.status(400).send(err);
     }
