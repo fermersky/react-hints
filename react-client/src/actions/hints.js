@@ -13,15 +13,27 @@ export const recieveHint = hint => {
     };
 };
 
+export const RECIEVE_HINTS = 'hints/RECIEVE_HINTS';
+export const recieveHints = hints => {
+    return {
+        type: RECIEVE_HINTS,
+        payload: hints
+    };
+};
+
 export const FETCH_HINT = 'hints/FETCH_HINT';
-export const fetchHint = hintSlug => {
+export const fetchHint = (filter, value) => {
     return async dispatch => {
         dispatch(requestHint());
 
         const hint = await fetch(
-            'http://localhost:3000/api/hints/slug/' + hintSlug
+            `http://localhost:3000/api/hints/${filter}/${value}`
         );
         const hintJson = await hint.json();
-        dispatch(recieveHint(hintJson));
+        if (filter === 'slug') {
+            dispatch(recieveHint(hintJson));
+        } else {
+            dispatch(recieveHints(hintJson));
+        }
     };
 };

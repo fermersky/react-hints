@@ -22,7 +22,7 @@ router.get('/slug/:slug', async (req, res) => {
 
 router.get('/tag/:tag', async (req, res) => {
     try {
-        const hint = await Hint.findOne({ tags: req.params.tag });
+        const hint = await Hint.find({ tags: req.params.tag });
         if (!hint) {
             res.status(404).end('hint not found');
         } else {

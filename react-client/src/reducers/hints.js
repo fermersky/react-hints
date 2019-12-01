@@ -1,5 +1,10 @@
 import { handleActions } from 'redux-actions';
-import { FETCH_HINT, REQUEST_HINT, RECIEVE_HINT } from '../actions/hints';
+import {
+    FETCH_HINT,
+    REQUEST_HINT,
+    RECIEVE_HINT,
+    RECIEVE_HINTS
+} from '../actions/hints';
 
 const hintsReducer = handleActions(
     {
@@ -15,6 +20,11 @@ const hintsReducer = handleActions(
             ...state,
             fetchingHint: false,
             currentHint: action.payload
+        }),
+        [RECIEVE_HINTS]: (state, action) => ({
+            ...state,
+            fetchingHint: false,
+            hints: action.payload
         })
     },
     { currentHint: {}, fetchingHint: false }

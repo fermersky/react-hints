@@ -11,7 +11,7 @@ class HintContainer extends Component {
 
     componentDidMount() {
         const hintSlug = this.props.match.params.hintSlug;
-        this.props.fetchHint(hintSlug);
+        this.props.fetchHint('slug', hintSlug);
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -37,8 +37,8 @@ function mapStateToProps({ hints }) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchHint: hintSlug => {
-            dispatch(fetchHint(hintSlug));
+        fetchHint: (filter, hintSlug) => {
+            dispatch(fetchHint(filter, hintSlug));
         }
     };
 }
