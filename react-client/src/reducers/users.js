@@ -12,7 +12,7 @@ const usersReducer = handleActions(
             imageUrl: action.payload
         })
     },
-    { imageUrl: {}, user: {} }
+    { imageUrl: '', user: {} }
 );
 
 export default usersReducer;

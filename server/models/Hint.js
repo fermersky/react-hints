@@ -3,17 +3,12 @@ const slug = require('mongoose-slug-updater');
 
 mongoose.plugin(slug);
 
-const TagSchema = mongoose.Schema({
-    title: {
-        type: String,
-        required: true
-    },
-    slug: {
-        type: String,
-        slug: 'title',
-        unique: true
-    }
-});
+// const TagSchema = mongoose.Schema({
+//     title: {
+//         type: String,
+//         required: true
+//     },
+// });
 
 const HintSchema = mongoose.Schema({
     title: {
@@ -21,7 +16,7 @@ const HintSchema = mongoose.Schema({
         required: true
     },
     tags: {
-        type: [TagSchema]
+        type: [String]
     },
     user_id: {
         type: String,

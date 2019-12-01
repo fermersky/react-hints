@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom';
 import './Tag.css';
 
 const Tag = props => {
+    function getSlugFromTag(tag) {
+        return tag.toLowerCase().replace(/\s/g, '-');
+    }
+
     return (
         <span
             className={
@@ -13,21 +17,18 @@ const Tag = props => {
         >
             <Link
                 to={{
-                    pathname: '/tag/' + props.tag.slug
+                    pathname: '/tag/' + getSlugFromTag(props.tag)
                 }}
                 className="tag-link"
             >
-                {props.tag.title}
+                {props.tag}
             </Link>
         </span>
     );
 };
 
 Tag.propTypes = {
-    tag: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        slug: PropTypes.string.isRequired
-    }).isRequired
+    tag: PropTypes.string.isRequired
 };
 
 export default Tag;

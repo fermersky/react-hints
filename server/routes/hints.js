@@ -29,11 +29,11 @@ router.post('/', async (req, res) => {
         // add tags which are not in tags table in db
         tags.forEach(async tag => {
             // check tag existens in tags table
-            const result = await Tag.findOne({ title: tag.title });
+            const result = await Tag.findOne({ title: tag });
 
             if (!result) {
                 // add if tag doesn't exist
-                await Tag.create({ title: tag.title });
+                await Tag.create({ title: tag });
             }
         });
 

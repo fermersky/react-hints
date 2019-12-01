@@ -13,7 +13,6 @@ class HintAuthorContainer extends Component {
 
     componentDidMount() {
         const { userId } = this.props;
-        console.log(userId);
 
         this.props.fetchUserImage(userId);
         this.props.fetchUser(userId);
@@ -22,10 +21,6 @@ class HintAuthorContainer extends Component {
     render() {
         const { type, users } = this.props;
         return type === 'min' ? (
-            // <img
-            //     src={this.props.users.imageUrl}
-            //     alt={this.props.users.user.name}
-            // />
             <HintAuthorMin user={users.user} imageUrl={users.imageUrl} />
         ) : (
             <p>sd</p>

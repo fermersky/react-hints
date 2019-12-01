@@ -16,7 +16,7 @@ const HintAuthorMin = ({ user, imageUrl }) => {
 
 HintAuthorMin.propTypes = {
     user: PropTypes.object.isRequired,
-    imageUrl: PropTypes.object.isRequired
+    imageUrl: PropTypes.string.isRequired
 };
 
 export default HintAuthorMin;
