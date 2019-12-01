@@ -9,8 +9,12 @@ const Root = ({ store }) => {
         <Provider store={store}>
             <Router>
                 <Header />
-
-                <Route path="/hint/:hintSlug" component={HintContainer} />
+                <Route except path="/tag/:tag" component={HintContainer} />
+                <Route
+                    except
+                    path="/hint/:hintSlug"
+                    component={HintContainer}
+                />
             </Router>
         </Provider>
     );

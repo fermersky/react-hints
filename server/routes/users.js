@@ -30,7 +30,7 @@ router.post('/register', async (req, res) => {
 
         // add user to db
         const addedUser = await User.create({
-            name: user.name,
+            name: '@' + user.name,
             email: user.email,
             password: encryptedPass
         });

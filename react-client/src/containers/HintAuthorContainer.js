@@ -21,7 +21,11 @@ class HintAuthorContainer extends Component {
     render() {
         const { type, users } = this.props;
         return type === 'min' ? (
-            <HintAuthorMin user={users.user} imageUrl={users.imageUrl} />
+            <HintAuthorMin
+                animClasses="animated fadeIn"
+                user={users.user}
+                imageUrl={users.imageUrl}
+            />
         ) : (
             <p>sd</p>
         );
