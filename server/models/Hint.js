@@ -18,6 +18,10 @@ const HintSchema = mongoose.Schema({
     slug: {
         type: String,
         slug: 'title'
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 });
 

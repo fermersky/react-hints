@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Typed from 'typed.js';
+import Typed from 'react-typed';
 import PropTypes from 'prop-types';
 import './Hint.css';
 import Tag from '../Tag/Tag';
@@ -18,35 +18,8 @@ class Hint extends Component {
         }).isRequired
     };
 
-    static getDerivedStateFromProps(props, state) {
-        if (props.hint !== state.hint) {
-            return {
-                hint: props.hint
-            };
-        }
-
-        return null;
-    }
-
-    componentDidUpdate() {
-        // initialize typedjs script
-        if (this.props.hint.title) {
-            const options = {
-                strings: [this.props.hint.title],
-                typeSpeed: 40,
-                backSpeed: 50,
-                onComplete: this.onTypedComplete
-            };
-            this.typed = new Typed(this.el, options);
-        }
-    }
-
     onTypedComplete = () => {
         this.setState({ typedComplete: true });
-        this.typed.stop();
-
-        // hide solid cursor
-        document.querySelector('.typed-cursor').style.visibility = 'hidden';
     };
 
     mapTagsToList = tags => {
@@ -64,31 +37,36 @@ class Hint extends Component {
         const { hint } = this.props;
 
         return (
-            <div className="container">
-                <div className="row hint-body">
-                    <h2 className="col-md-12">
-                        <span
-                            className="hint-title"
-                            style={{ whiteSpace: 'pre-wrap' }}
-                            ref={el => {
-                                this.el = el;
-                            }}
-                        />
-                    </h2>
-                </div>
-                <div className="row">
-                    <div className="col-md-12">
-                        <ul className="hint-tags">
-                            {this.mapTagsToList(hint.tags)}
-                        </ul>
+            Object.keys(hint).length > 0 && (
+                <div className="container">
+                    <div className="row hint-body">
+                        <h2 className="col-md-12">
+                            <Typed
+                                className="hint-title"
+                                strings={[hint.title]}
+                                typeSpeed={40}
+                                backSpeed={50}
+                                onComplete={this.onTypedComplete}
+                            />
+                        </h2>
                     </div>
-                </div>
-                {this.state.typedComplete && (
                     <div className="row">
-                        <HintAuthorContainer type="min" userId={hint.user_id} />
+                        <div className="col-md-12">
+                            <ul className="hint-tags">
+                                {this.mapTagsToList(hint.tags)}
+                            </ul>
+                        </div>
                     </div>
-                )}
-            </div>
+                    {this.state.typedComplete && (
+                        <div className="row">
+                            <HintAuthorContainer
+                                type="min"
+                                userId={hint.user_id}
+                            />
+                        </div>
+                    )}
+                </div>
+            )
         );
     }
 }

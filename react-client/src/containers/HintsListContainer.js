@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchHint } from '../actions/hints';
+import HintsList from '../components/HintsList/HintsList';
 
-class ListHintsContainer extends Component {
+class HintsListContainer extends Component {
+    state = {
+        hinst: []
+    };
+
     componentDidMount() {
         const filter = this.props.match.params.filter;
         const value = this.props.match.params.value;
@@ -10,7 +15,8 @@ class ListHintsContainer extends Component {
     }
 
     render() {
-        return <p>{JSON.stringify(this.props.hints.hints)}</p>;
+        const { hints } = this.props.hints;
+        return hints.length > 0 && <HintsList hints={hints} />;
     }
 }
 
@@ -28,4 +34,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListHintsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(HintsListContainer);

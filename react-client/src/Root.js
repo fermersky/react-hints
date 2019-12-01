@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import HintContainer from './containers/HintContainer';
 import Header from './components/Header/Header';
-import ListHintsContainer from './containers/ListHintsContainer';
+import ListHintsContainer from './containers/HintsListContainer';
 
 const Root = ({ store }) => {
     return (

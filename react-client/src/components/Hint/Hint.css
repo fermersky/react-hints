@@ -15,8 +15,7 @@
 }
 .typed-cursor,
 .typed-cursor.typed-cursor--blink {
-    font-size: 3em;
-    margin-left: -10px;
+    font-size: 1.2em;
 }
 
 .hint-tags {

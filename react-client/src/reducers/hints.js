@@ -27,7 +27,7 @@ const hintsReducer = handleActions(
             hints: action.payload
         })
     },
-    { currentHint: {}, fetchingHint: false }
+    { currentHint: {}, fetchingHint: false, hints: [] }
 );
 
 export default hintsReducer;

@@ -25,7 +25,9 @@ class HintContainer extends Component {
     }
 
     render() {
-        return <Hint hint={this.state.hint} />;
+        return (
+            !this.props.hints.fetchingHint && <Hint hint={this.state.hint} />
+        );
     }
 }
 
