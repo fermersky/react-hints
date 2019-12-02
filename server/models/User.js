@@ -4,16 +4,20 @@ const UserSchema = mongoose.Schema({
     name: {
         type: String,
         max: 30,
-        unique: true
+        unique: true,
+        required: true
     },
     email: {
-        type: String
+        type: String,
+        required: true
     },
     password: {
-        type: String
+        type: String,
+        required: true
     },
     img_path: {
-        type: String
+        type: String,
+        required: true
     }
 });
 
