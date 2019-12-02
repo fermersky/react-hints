@@ -17,7 +17,7 @@ const Tag = props => {
         >
             <Link
                 to={{
-                    pathname: '/tag/' + getSlugFromTag(props.tag)
+                    pathname: '/hints/tag/' + getSlugFromTag(props.tag)
                 }}
                 className="tag-link"
             >

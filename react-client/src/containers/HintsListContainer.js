@@ -16,7 +16,13 @@ class HintsListContainer extends Component {
 
     render() {
         const { hints } = this.props.hints;
-        return hints.length > 0 && <HintsList hints={hints} />;
+        return (
+            hints.length > 0 && (
+                <div className="container">
+                    <HintsList hints={hints} />
+                </div>
+            )
+        );
     }
 }
 

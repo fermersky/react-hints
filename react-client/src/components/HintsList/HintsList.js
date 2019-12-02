@@ -2,9 +2,27 @@ import React from 'react';
 import HintSmall from './../HintSmall/HintSmall';
 
 const HintsList = ({ hints }) => {
-    return hints.map((hint, index) => {
-        return <HintSmall hint={hint} key={index} />;
-    });
+    function mapHintsToList() {
+        return hints.map((hint, index) => {
+            return (
+                <li key={index}>
+                    <HintSmall hint={hint} />
+                </li>
+            );
+        });
+    }
+
+    return (
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+            }}
+        >
+            <ul>{mapHintsToList()}</ul>
+        </div>
+    );
 };
 
 // class HintsList
