@@ -11,6 +11,10 @@ const HintSchema = mongoose.Schema({
     tags: {
         type: [String]
     },
+    author: {
+        type: String,
+        require: true
+    },
     user_id: {
         type: String,
         required: true

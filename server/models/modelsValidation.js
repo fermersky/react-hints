@@ -7,7 +7,8 @@ const postHintValidateAsync = async data => {
             .min(6)
             .max(155),
         tags: Joi.array(),
-        user_id: Joi.string().required()
+        user_id: Joi.string().required(),
+        author: Joi.string().required()
     });
 
     return await schema.validateAsync(data);
@@ -27,7 +28,7 @@ const registerUserValidateAsync = async data => {
         password: Joi.string()
             .min(3)
             .required(),
-        avatar: Joi.string().required()
+        img_path: Joi.string().required()
     });
 
     return await schema.validateAsync(data);
