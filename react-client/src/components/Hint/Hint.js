@@ -8,8 +8,14 @@ import HintAuthorContainer from '../../containers/HintAuthorContainer';
 class Hint extends Component {
     state = {
         typedComplete: false,
-        hint: {}
+        hint: {},
+        isMounted: false
     };
+
+    constructor() {
+        super();
+        this.typed = React.createRef();
+    }
 
     static propTypes = {
         hint: PropTypes.shape({
@@ -19,7 +25,7 @@ class Hint extends Component {
     };
 
     onTypedComplete = () => {
-        this.setState({ typedComplete: true });
+        this.state.isMounted && this.setState({ typedComplete: true });
     };
 
     mapTagsToList = tags => {
@@ -33,6 +39,14 @@ class Hint extends Component {
         }
     };
 
+    componentDidMount() {
+        this.setState({ isMounted: true });
+    }
+
+    componentWillUnmount() {
+        this.setState({ isMounted: false });
+    }
+
     render() {
         const { hint } = this.props;
 
@@ -42,6 +56,7 @@ class Hint extends Component {
                     <div className="row hint-body">
                         <h2 className="col-md-12">
                             <Typed
+                                ref={this.typed}
                                 className="hint-title"
                                 strings={[hint.title]}
                                 typeSpeed={40}
