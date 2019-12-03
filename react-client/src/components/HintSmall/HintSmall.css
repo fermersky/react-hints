@@ -2,4 +2,26 @@
     box-shadow: 0 0 10px #ccc;
     padding: 40px;
     text-align: center;
+    margin: 30px;
+}
+
+.hint-link:hover {
+    text-decoration: none;
+}
+.hint-link:hover .hint-link--bg {
+    height: 110%;
+}
+
+.hint-link--content {
+    color: rgb(29, 29, 29);
+    position: relative;
+}
+.hint-link--bg {
+    width: 100%;
+    height: 0px;
+    background: rgba(206, 240, 16, 0.555);
+    bottom: -5px;
+    position: absolute;
+
+    transition: 0.2s;
 }
