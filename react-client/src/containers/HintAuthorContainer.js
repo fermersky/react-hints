@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { fetchUser, fetchUserImage } from './../actions/users';
-
-import { connect } from 'react-redux';
 import HintAuthorMin from '../components/HintAuthorMin/HintAuthorMin';
 import HintAuthorMax from '../components/HintAuthorMax/HintAuthorMax';
+import UserFetchProvider from '../modules/UserFetchProvider';
 
 class HintAuthorContainer extends Component {
+    state = {
+        user: {},
+        imageUrl: ''
+    };
+
     static propTypes = {
         userId: PropTypes.string.isRequired,
         type: PropTypes.oneOf(['min', 'max']).isRequired
@@ -14,45 +17,44 @@ class HintAuthorContainer extends Component {
 
     componentDidMount() {
         const { userId } = this.props;
+        this.fetchUserInfo(userId);
+    }
 
-        if (userId) {
-            this.props.fetchUserImage(userId);
-            this.props.fetchUser(userId);
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.userId !== prevProps.userId) {
+            this.fetchUserInfo(this.props.userId);
         }
     }
 
+    fetchUserInfo = userId => {
+        UserFetchProvider.fetchUser(userId, this.onUserFetched);
+        UserFetchProvider.fetchUserImage(userId, this.onUserImageFetched);
+    };
+
+    onUserFetched = user => {
+        this.setState({ user });
+    };
+
+    onUserImageFetched = url => {
+        this.setState({ imageUrl: url });
+    };
+
     render() {
-        const { type, users } = this.props;
+        const { type } = this.props;
         return type === 'min' ? (
             <HintAuthorMin
-                animClasses="animated fadeIn"
-                user={users.user}
-                imageUrl={users.imageUrl}
+                animClasses="animated fadeInBig"
+                user={this.state.user}
+                imageUrl={this.state.imageUrl}
             />
         ) : (
-            <HintAuthorMax user={users.user} imageUrl={users.imageUrl} />
+            <HintAuthorMax
+                animClasses="animated fadeInBig"
+                user={this.state.user}
+                imageUrl={this.state.imageUrl}
+            />
         );
     }
 }
 
-function mapStateToProps({ users }) {
-    return {
-        users
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        fetchUser: userId => {
-            dispatch(fetchUser(userId));
-        },
-        fetchUserImage: userId => {
-            dispatch(fetchUserImage(userId));
-        }
-    };
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(HintAuthorContainer);
+export default HintAuthorContainer;
