@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './Hint.css';
 import Tag from '../Tag/Tag';
 import HintAuthorContainer from '../../containers/HintAuthorContainer';
+import TagsList from '../TagsList/TagsList';
 
 class Hint extends Component {
     state = {
@@ -26,17 +27,6 @@ class Hint extends Component {
 
     onTypedComplete = () => {
         this.state.isMounted && this.setState({ typedComplete: true });
-    };
-
-    mapTagsToList = tags => {
-        // when title typing is complete
-        if (tags && this.state.typedComplete) {
-            return tags.map((tag, index) => (
-                <li key={index}>
-                    <Tag animationClasses="animated flipInX" tag={tag} />
-                </li>
-            ));
-        }
     };
 
     componentDidMount() {
@@ -65,19 +55,21 @@ class Hint extends Component {
                             />
                         </h2>
                     </div>
-                    <div className="row">
-                        <div className="col-md-12">
-                            <ul className="hint-tags">
-                                {this.mapTagsToList(hint.tags)}
-                            </ul>
-                        </div>
-                    </div>
+
                     {this.state.typedComplete && (
                         <div className="row">
-                            <HintAuthorContainer
-                                type="min"
-                                userId={hint.user_id}
-                            />
+                            <div className="col-md-12">
+                                <TagsList
+                                    animationClasses="animated flipInX"
+                                    tags={hint.tags}
+                                />
+                            </div>
+                            <div className="col-md-12">
+                                <HintAuthorContainer
+                                    type="min"
+                                    userId={hint.user_id}
+                                />
+                            </div>
                         </div>
                     )}
                 </div>

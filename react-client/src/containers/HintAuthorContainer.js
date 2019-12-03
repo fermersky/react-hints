@@ -4,6 +4,7 @@ import { fetchUser, fetchUserImage } from './../actions/users';
 
 import { connect } from 'react-redux';
 import HintAuthorMin from '../components/HintAuthorMin/HintAuthorMin';
+import HintAuthorMax from '../components/HintAuthorMax/HintAuthorMax';
 
 class HintAuthorContainer extends Component {
     static propTypes = {
@@ -29,7 +30,7 @@ class HintAuthorContainer extends Component {
                 imageUrl={users.imageUrl}
             />
         ) : (
-            <p>sd</p>
+            <HintAuthorMax user={users.user} imageUrl={users.imageUrl} />
         );
     }
 }

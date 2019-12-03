@@ -22,7 +22,7 @@ export const recieveHints = hints => {
 };
 
 export const FETCH_HINT = 'hints/FETCH_HINT';
-export const fetchHint = (filter, value) => {
+export const fetchHint = (filter = '', value = '') => {
     return async dispatch => {
         dispatch(requestHint());
 

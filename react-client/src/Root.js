@@ -3,22 +3,20 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import HintContainer from './containers/HintContainer';
 import Header from './components/Header/Header';
-import ListHintsContainer from './containers/HintsListContainer';
+import HintsListContainer from './containers/HintsListContainer';
 
 const Root = ({ store }) => {
     return (
         <Provider store={store}>
             <Router>
                 <Header />
+                <Route exact path="/:author" component={HintsListContainer} />
+
+                <Route exact path="/hint/:hintSlug" component={HintContainer} />
                 <Route
-                    except
+                    exact
                     path="/hints/:filter/:value"
-                    component={ListHintsContainer}
-                />
-                <Route
-                    except
-                    path="/hint/:hintSlug"
-                    component={HintContainer}
+                    component={HintsListContainer}
                 />
             </Router>
         </Provider>
