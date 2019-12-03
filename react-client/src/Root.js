@@ -18,6 +18,11 @@ const Root = ({ store }) => {
                     path="/hints/:filter/:value"
                     component={HintsListContainer}
                 />
+                {/* <Route
+                    exact
+                    path="/login"
+                    component={LoginContainer}
+                /> */}
             </Router>
         </Provider>
     );
