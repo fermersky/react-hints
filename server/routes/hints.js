@@ -3,8 +3,13 @@ const { postHintValidateAsync } = require('../models/modelsValidation');
 const Hint = require('../models/Hint');
 const Tag = require('../models/Tag');
 
-router.get('/', (req, res) => {
-    res.end('get tips');
+router.get('/', async (req, res) => {
+    try {
+        const hints = await Hint.find({});
+        res.json(hints);
+    } catch (err) {
+        res.status(400).json(err);
+    }
 });
 
 router.get('/slug/:slug', async (req, res) => {
@@ -23,6 +28,19 @@ router.get('/slug/:slug', async (req, res) => {
 router.get('/tag/:tag', async (req, res) => {
     try {
         const hint = await Hint.find({ tags: req.params.tag });
+        if (!hint) {
+            res.status(404).end('hint not found');
+        } else {
+            res.json(hint);
+        }
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+router.get('/author/:author', async (req, res) => {
+    try {
+        const hint = await Hint.find({ author: req.params.author });
         if (!hint) {
             res.status(404).end('hint not found');
         } else {
