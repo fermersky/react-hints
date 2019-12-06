@@ -67,7 +67,25 @@ router.post('/login', async (req, res) => {
 
         // get token
         const token = jwt.sign({ _id: user._id }, process.env.USER_SECRET);
-        res.header('Authorization', 'Bearer ' + token).send(token);
+        res.header('Authorization', 'Bearer ' + token).json({
+            token,
+            user_id: user._id,
+            name: user.name
+        });
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
+router.get('/name/:userName', async (req, res) => {
+    try {
+        const user = await User.findOne({ name: req.params.userName });
+
+        if (!user) {
+            res.status(404).send('user was not found');
+        }
+
+        res.send(user);
     } catch (err) {
         res.status(400).send(err);
     }

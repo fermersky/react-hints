@@ -1,0 +1,12 @@
+.login-container {
+    width: 60%;
+    margin: 100px auto;
+}
+
+input[type='email']:not(.browser-default) {
+    border: none;
+}
+
+input[type='password']:not(.browser-default) {
+    border: none;
+}

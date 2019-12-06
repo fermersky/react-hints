@@ -21,10 +21,8 @@ class HintsListContainer extends Component {
         const { author } = this.props.match.params;
 
         if (author) {
-            // this.props.fetchHint('author', author);
             this.props.fetchHint('author', author);
         } else {
-            // this.props.fetchHint(filter, value);
             this.props.fetchHint(filter, value);
         }
     };
@@ -36,7 +34,9 @@ class HintsListContainer extends Component {
         return (
             hints.length > 0 && (
                 <div className="container">
-                    {author && <HintAuthorContainer type="max" />}
+                    {author && (
+                        <HintAuthorContainer userId={this.userId} type="max" />
+                    )}
                     <HintsList hints={hints} />
                 </div>
             )
