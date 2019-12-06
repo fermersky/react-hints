@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import HintContainer from './containers/HintContainer';
 import Header from './components/Header/Header';
 import HintsListContainer from './containers/HintsListContainer';
+import LoginContainer from './containers/LoginContainer';
 
 const Root = ({ store }) => {
     return (
@@ -15,14 +16,11 @@ const Root = ({ store }) => {
                 <Route exact path="/hint/:hintSlug" component={HintContainer} />
                 <Route
                     exact
-                    path="/hints/:filter/:value"
+                    path="/hints/:filter?/:value?"
                     component={HintsListContainer}
                 />
-                {/* <Route
-                    exact
-                    path="/login"
-                    component={LoginContainer}
-                /> */}
+                <Route exact path="/" component={HintsListContainer} />
+                <Route exact path="/login" component={LoginContainer} />
             </Router>
         </Provider>
     );

@@ -26,9 +26,15 @@ export const fetchHint = (filter = '', value = '') => {
     return async dispatch => {
         dispatch(requestHint());
 
-        const hint = await fetch(
-            `http://localhost:3000/api/hints/${filter}/${value}`
-        );
+        let hint;
+
+        if (filter && value) {
+            hint = await fetch(
+                `http://localhost:3000/api/hints/${filter}/${value}`
+            );
+        } else {
+            hint = await fetch(`http://localhost:3000/api/hints/`);
+        }
         const hintJson = await hint.json();
         if (filter === 'slug') {
             dispatch(recieveHint(hintJson));
