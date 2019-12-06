@@ -20,15 +20,15 @@ class HintAuthorContainer extends Component {
         this.fetchUserInfo(userId);
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if (this.props.userId !== prevProps.userId) {
             this.fetchUserInfo(this.props.userId);
         }
     }
 
     fetchUserInfo = userId => {
-        UserFetchProvider.fetchUser(userId, this.onUserFetched);
-        UserFetchProvider.fetchUserImage(userId, this.onUserImageFetched);
+        UserFetchProvider.fetchUserById(userId, this.onUserFetched);
+        UserFetchProvider.fetchUserImageById(userId, this.onUserImageFetched);
     };
 
     onUserFetched = user => {
